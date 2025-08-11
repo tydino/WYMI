@@ -31,6 +31,7 @@ public class TileManager {
 
             //blank collision
             tile[0] = new Tile();
+            tile[0].collision = true;
 
             //grass
             tile[1] = new Tile();
