@@ -2,7 +2,7 @@ package main;
 
 import javax.swing.*;
 
-//on #9
+//use https://www.piskelapp.com/p/create/sprite for animated sprites
 public class Main {
 
     public static void main(String[] args) {

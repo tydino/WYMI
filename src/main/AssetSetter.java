@@ -3,6 +3,7 @@ package main;
 import objects.OBJ_BasicChest;
 import objects.OBJ_BasicKey;
 import objects.OBJ_DoubleDoor;
+import objects.OBJ_Test;
 
 public class AssetSetter {
 
@@ -24,5 +25,10 @@ public class AssetSetter {
         gp.obj[2] = new OBJ_BasicChest();
         gp.obj[2].worldX = 19 *gp.tileSize;
         gp.obj[2].worldY = 5 *gp.tileSize;
+
+        gp.obj[3] = new OBJ_Test();
+        gp.obj[3].worldX = 19 *gp.tileSize;
+        gp.obj[3].worldY = 3 *gp.tileSize;
+
     }
 }

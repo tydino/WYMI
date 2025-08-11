@@ -125,11 +125,17 @@ public class Player extends Entity{
                     break;
                 case "Door":
                     if(hasKey>0){
+                        gp.playSFX(2);
                         gp.obj[i] = null;
                         hasKey--;
                         System.out.println("Door went bye bye.");
                     }
                     System.out.println("Key:"+hasKey);
+                    break;
+                case "Test":
+                    gp.playSFX(1);
+                    speed = speed * 2;
+                    gp.obj[i] = null;
                     break;
             }
         }
