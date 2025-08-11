@@ -1,0 +1,3 @@
+Please note that this is currently a work in progress. following a tutorial i will make note of once i finnish it and understand more about java!
+
+do know that this is being made public to allow you and anyone else to view and use this as a base for whatever you'd like to make though it does NOT give you the right to my story i am making in it or the characters used. The characters are free to use in fanmade content for clarification as well ut it cannot be using the sprites that will be made for them.
