@@ -7,38 +7,43 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.nio.Buffer;
 
 public class Player extends Entity{
 
     GamePanel gp;
     KeyHandler keyH;
 
+    public final int screenX;
+    public final int screenY;
+
     public Player(GamePanel gp, KeyHandler keyH){
         
         this.gp = gp;
         this.keyH = keyH;
 
+        screenX = gp.screenWidth/2 - (gp.tileSize/2);
+        screenY = gp.screenHeight/2 - (gp.tileSize/2);
+
         setDefaultValues();
         getPlayerImage();
     }
     public void setDefaultValues(){
-        x=48;
-        y=48;
+        WorldX=gp.tileSize * 23;
+        WorldY=gp.tileSize * 21;
         speed=3;
         direction = "down";
     }
 
     public void getPlayerImage(){
         try{
-            up1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/test_up1.png"));
-            up2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/test_up2.png"));
-            down1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/test_down1.png"));
-            down2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/test_down2.png"));
-            left1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/test_left1.png"));
-            left2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/test_left2.png"));
-            right1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/test_right1.png"));
-            right2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/test_right2.png"));
+            up1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/up1.png"));
+            up2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/up2.png"));
+            down1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/down1.png"));
+            down2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/down2.png"));
+            left1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/left1.png"));
+            left2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/left2.png"));
+            right1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/right1.png"));
+            right2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/right2.png"));
 
         }catch(IOException e){
             e.printStackTrace();
@@ -51,20 +56,20 @@ public class Player extends Entity{
 
             if (keyH.upPressed) {
                 direction = "up";
-                y -= speed;
+                WorldY -= speed;
             } else if (keyH.downPressed) {
                 direction = "down";
-                y += speed;
+                WorldY += speed;
             } else if (keyH.leftPressed) {
                 direction = "left";
-                x -= speed;
+                WorldX -= speed;
             } else if (keyH.rightPressed) {
                 direction = "right";
-                x += speed;
+                WorldX += speed;
             }
 
             spriteCounter++;
-            if (spriteCounter > 15) {
+            if (spriteCounter > 5) {
                 if (spriteNum == 1) {
                     spriteNum = 2;
                 } else if (spriteNum == 2) {
@@ -113,7 +118,7 @@ public class Player extends Entity{
                 }
                 break;
         }
-        g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
-
+        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+//currently at https://youtu.be/Ny_YHoTYcxo?t=277
     }
 }
