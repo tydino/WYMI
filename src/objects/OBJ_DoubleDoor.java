@@ -13,5 +13,6 @@ public class OBJ_DoubleDoor extends SuperObject{
                 IOException e) {
             e.printStackTrace();
         }
+        collision = true;
     }
 }

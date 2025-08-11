@@ -15,6 +15,7 @@ public class Player extends Entity{
 
     public final int screenX;
     public final int screenY;
+    int hasKey = 0;
 
     public Player(GamePanel gp, KeyHandler keyH){
         
@@ -27,6 +28,8 @@ public class Player extends Entity{
         solidArea = new Rectangle();
         solidArea.x = 4 * gp.scale;
         solidArea.y = 13 * gp.scale;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
         solidArea.width = 7 * gp.scale;
         solidArea.height = 2 * gp.scale;
 
@@ -74,6 +77,10 @@ public class Player extends Entity{
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
+            //CHECKS OBJECT COLLISION
+            int objIndex = gp.cChecker.checkObject(this, true);
+            pickUpObject(objIndex);
+
             //IF COLLISION IS FALSE, PLAYER CAN MOVE
             if (collisionOn == false){
                 switch(direction){
@@ -104,6 +111,30 @@ public class Player extends Entity{
         }
 
     }
+
+    public void pickUpObject(int i){
+        if(i != 999){
+
+            String objectName = gp.obj[i].name;
+
+            switch(objectName) {
+                case "Basic Key":
+                    hasKey++;
+                    gp.obj[i] = null;
+                    System.out.println("Key:"+hasKey);
+                    break;
+                case "Door":
+                    if(hasKey>0){
+                        gp.obj[i] = null;
+                        hasKey--;
+                        System.out.println("Door went bye bye.");
+                    }
+                    System.out.println("Key:"+hasKey);
+                    break;
+            }
+        }
+    }
+
     public void draw(Graphics2D g2){
 
         BufferedImage image = null;
@@ -143,6 +174,5 @@ public class Player extends Entity{
                 break;
         }
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-//currently at https://youtu.be/Ny_YHoTYcxo?t=277
     }
 }
