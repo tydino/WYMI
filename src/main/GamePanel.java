@@ -1,6 +1,7 @@
 package main;
 
 import entities.Player;
+import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,22 +13,18 @@ public class GamePanel extends JPanel implements Runnable{
     final int scale = 3;//s*oTS
 
     public final int tileSize = originalTileSize * scale; //48x48 tiles will be displayed
-    final int maxScreenCol = 16; // horizonatl/left right
-    final int maxScreenRow = 12; // vertical/up down
-    final int screenWidth = tileSize * maxScreenCol;
-    final int screenHeight = tileSize * maxScreenRow;
+    public final int maxScreenCol = 16; // horizonatl/left right
+    public final int maxScreenRow = 12; // vertical/up down
+    public final int screenWidth = tileSize * maxScreenCol;
+    public final int screenHeight = tileSize * maxScreenRow;
 
     //FPS
     int FPS = 30;
 
+    TileManager tileM = new TileManager(this);
     KeyHandler  keyH = new KeyHandler();
     Thread gameThread;
     Player player = new Player(this, keyH);
-
-    //set player's default position
-    int playerX = 100;
-    int playerY = 100;
-    int playerSpeed = 4;
 
     public GamePanel(){
 
@@ -79,7 +76,9 @@ public class GamePanel extends JPanel implements Runnable{
 
         super.paintComponent(g);
 
-        Graphics2D g2 = (Graphics2D)g;
+        Graphics2D g2 = (Graphics2D)g;//drawn bottom to top on screen is top to bottom here.
+
+        tileM.draw(g2);
 
         player.draw(g2);
 
