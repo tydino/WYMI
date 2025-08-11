@@ -27,8 +27,8 @@ public class Player extends Entity{
         solidArea = new Rectangle();
         solidArea.x = 4 * gp.scale;
         solidArea.y = 13 * gp.scale;
-        solidArea.width = 8 * gp.scale;
-        solidArea.height = 3 * gp.scale;
+        solidArea.width = 7 * gp.scale;
+        solidArea.height = 2 * gp.scale;
 
         setDefaultValues();
         getPlayerImage();

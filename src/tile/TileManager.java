@@ -120,6 +120,7 @@ public class TileManager {
                 worldY - gp.tileSize < gp.player.WorldY + gp.player.screenY) {
                 g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
             }
+
             worldCol++;
 
             if(worldCol == gp.maxWorldCol){
