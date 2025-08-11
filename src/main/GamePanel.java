@@ -10,7 +10,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     //SCREEN SETTINGS
     final int originalTileSize = 16;///oTS x XoTStile size
-    final int scale = 3;//s*oTS
+    public final int scale = 3;//s*oTS
 
     public final int tileSize = originalTileSize * scale; //48x48 tiles will be displayed
     public final int maxScreenCol = 16; // horizonatl/left right
@@ -30,6 +30,7 @@ public class GamePanel extends JPanel implements Runnable{
     public TileManager tileM = new TileManager(this);
     public KeyHandler  keyH = new KeyHandler();
     public Thread gameThread;
+    public CollisionCheck cChecker = new CollisionCheck(this);
     public Player player = new Player(this, keyH);
 
     public GamePanel(){
