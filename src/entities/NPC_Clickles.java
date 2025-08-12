@@ -22,6 +22,7 @@ public class NPC_Clickles extends Entity{
         solidArea.height = 2 * gp.scale;
 
         getImage();
+        setDialogue();
     }
 
     public void getImage(){
@@ -33,6 +34,20 @@ public class NPC_Clickles extends Entity{
         left2 = setup("clickles","left2");
         right1 = setup("clickles","right1");
         right2 = setup("clickles","right2");
+    }
+
+    public void setDialogue(){
+
+        dialogues[0] = "Hello! Aren't you THE new guy?";
+        dialogues[1] = "Do you know why you are here?";
+        dialogues[2] = "It appears to me \nthat you are a silent type.";
+        dialogues[3] = "well, bye now i dont want to \nkeep you here too long!";
+        dialogues[4] = "...";
+        dialogues[5] = "...";
+        dialogues[6] = "...";
+        dialogues[7] = "...";
+        dialogues[8] = "Please stop bugging me.";
+        dialogues[9] = "...";
     }
 
     public void setAction(){
@@ -58,5 +73,13 @@ public class NPC_Clickles extends Entity{
 
             actionLockCount = 0;
         }
+    }
+
+    public void speak(){
+
+        //can go without this, but as a reminder untill i do it, you can add character specific stuff here.
+
+        super.speak();
+
     }
 }

@@ -11,12 +11,13 @@ public class UI {
     public String message = "";
     int messageCounter = 0;
     public boolean gameFinished = false;
+    public String currentDialogue = "";
 
     public UI(GamePanel gp){
         this.gp = gp;
 
         arial_40 = new Font("Arial", Font.PLAIN, 40);
-        arial_40 = new Font("Arial", Font.BOLD, 80);
+        arial_80B = new Font("Arial", Font.BOLD, 80);
     }
 
     public void showMessage(String text){
@@ -32,11 +33,17 @@ public class UI {
         g2.setFont(arial_40);
         g2.setColor(Color.white);
 
+        //PLAY STATE
         if(gp.gameState == gp.playState){
             //Do playstate stuff later
         }
+        //PAUSE STATE
         if(gp.gameState == gp.pauseState){
             drawPauseScreen();
+        }
+        //DIALOGUE STATE
+        if(gp.gameState == gp.dialogueState){
+            drawDialogueScreen();
         }
     }
 
@@ -48,6 +55,39 @@ public class UI {
 
         g2.drawString(text, x, y);
     }
+
+    public void drawDialogueScreen() {
+
+        //WINDOW
+        int x = gp.tileSize * 2;
+        int y = gp.tileSize/2;
+        int width = gp.screenWidth - (gp.tileSize * 4);
+        int height = gp.tileSize*4;
+
+        drawSubWindow(x, y, width, height);
+
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 28f));
+        x += gp.tileSize;
+        y += gp.tileSize;
+
+        for(String line : currentDialogue.split("\n")){
+            g2.drawString(line, x, y);
+            y+=40;
+        }
+    }
+
+    public void drawSubWindow(int x, int y, int width, int height){
+
+        Color c = new Color(5, 0, 5, 220);
+        g2.setColor(c);
+        g2.fillRoundRect(x, y, width, height, gp.tileSize/2, gp.tileSize/2);
+
+        c = new Color(255, 255, 255);
+        g2.setColor(c);
+        g2.setStroke(new BasicStroke(5));
+        g2.drawRoundRect(x+5, y+5, width-10, height-10, gp.tileSize/3, gp.tileSize/3);
+    }
+
     public int getXForCenteredText(String text){
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = gp.screenWidth/2 - length/2;

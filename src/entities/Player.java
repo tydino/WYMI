@@ -134,8 +134,14 @@ public class Player extends Entity{
 
     public void interactNPC(int i){
         if(i != -1){
-            System.out.println("hit npc");
+
+            if(gp.keyH.enterPressed) {
+                gp.gameState = gp.dialogueState;
+                gp.npc[i].speak();
+                gp.keyH.enterPressed = false;
+            }
         }
+        gp.keyH.enterPressed = false;
     }
 
     public void draw(Graphics2D g2){
