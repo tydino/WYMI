@@ -7,7 +7,10 @@ import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
-//on part https://youtu.be/vztluVKH4P4?list=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq
+//on part https://youtu.be/vztluVKH4P4?list=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq1
+
+
+
 public class GamePanel extends JPanel implements Runnable{
 
     //SCREEN SETTINGS
