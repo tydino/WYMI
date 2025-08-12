@@ -1,6 +1,7 @@
 package main;
 
 import entities.NPC_Clickles;
+import monster.MON_Fluffle;
 import objects.OBJ_DoubleDoor;
 
 public class AssetSetter {
@@ -23,14 +24,16 @@ public class AssetSetter {
         gp.npc[0] = new NPC_Clickles(gp);
         gp.npc[0].WorldX = gp.tileSize*16;
         gp.npc[0].WorldY = gp.tileSize*10;
+    }
 
-        gp.npc[1] = new NPC_Clickles(gp);
-        gp.npc[1].WorldX = gp.tileSize*16;
-        gp.npc[1].WorldY = gp.tileSize*10;
+    public void setMonster(){
 
-        gp.npc[2] = new NPC_Clickles(gp);
-        gp.npc[2].WorldX = gp.tileSize*16;
-        gp.npc[2].WorldY = gp.tileSize*10;
+        gp.monster[0] = new MON_Fluffle(gp);
+        gp.monster[0].WorldX = gp.tileSize*32;
+        gp.monster[0].WorldY = gp.tileSize*13;
 
+        gp.monster[1] = new MON_Fluffle(gp);
+        gp.monster[1].WorldX = gp.tileSize*28;
+        gp.monster[1].WorldY = gp.tileSize*17;
     }
 }
