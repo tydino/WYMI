@@ -48,18 +48,18 @@ public class Player extends Entity{
     }
 
     public void getPlayerImage(){
-        up1 = setup("player","up1");
-        up2 = setup("player","up2");
-        down1 = setup("player","down1");
-        down2 = setup("player","down2");
-        left1 = setup("player","left1");
-        left2 = setup("player","left2");
-        right1 = setup("player","right1");
-        right2 = setup("player","right2");
+        up1 = setup("", "player","up1");
+        up2 = setup("", "player","up2");
+        down1 = setup("", "player","down1");
+        down2 = setup("", "player","down2");
+        left1 = setup("", "player","left1");
+        left2 = setup("", "player","left2");
+        right1 = setup("", "player","right1");
+        right2 = setup("", "player","right2");
     }
 
     @Override
-    public BufferedImage setup(String imagePath, String imageName){
+    public BufferedImage setup(String directory, String imagePath, String imageName){
 
         UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;

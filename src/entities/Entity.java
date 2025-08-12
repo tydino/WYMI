@@ -14,7 +14,7 @@ public class Entity {
     public int WorldX, WorldY;
     public int speed;
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
-    public  String direction;
+    public  String direction = "down";
     public int spriteCounter =0;
     public int spriteNum = 1;
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
@@ -23,6 +23,9 @@ public class Entity {
     public int actionLockCount = 0;
     String[] dialogues = new String[50];
     int dialogueIndex = 0;
+    public BufferedImage image, image2, image3, image4, image5;
+    public String name;
+    public boolean collision = false;
 
     //CHARACTER STATUS
 
@@ -145,13 +148,13 @@ public class Entity {
         }
     }
 
-    public BufferedImage setup(String imagePath, String imageName){
+    public BufferedImage setup(String directory, String imagePath, String imageName){
 
         UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;
 
         try{
-            image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("npc/" + imagePath + "/" + imageName + ".png"));
+            image = ImageIO.read(getClass().getClassLoader().getResourceAsStream(directory + "/" + imagePath + "/" + imageName + ".png"));
             image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
         }catch(IOException e){
             e.printStackTrace();

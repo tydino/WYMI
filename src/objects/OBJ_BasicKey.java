@@ -1,23 +1,14 @@
 package objects;
 
+import entities.Entity;
 import main.GamePanel;
 
-import javax.imageio.ImageIO;
-import java.io.IOException;
-
-public class OBJ_BasicKey extends SuperObject{
-
-    GamePanel gp;
+public class OBJ_BasicKey extends Entity {
 
     public OBJ_BasicKey(GamePanel gp){
-        this.gp = gp;
+        super(gp);
 
         name = "Basic Key";
-        try{
-            image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("objects/basic_key.png"));
-            uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        down1 = setup("objects","basics","basic_key");
     }
 }
