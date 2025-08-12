@@ -2,6 +2,7 @@ package entities;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UtilityTool;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -15,7 +16,6 @@ public class Player extends Entity{
 
     public final int screenX;
     public final int screenY;
-    public int hasKey = 0;
 
     public Player(GamePanel gp, KeyHandler keyH){
         
@@ -44,19 +44,28 @@ public class Player extends Entity{
     }
 
     public void getPlayerImage(){
-        try{
-            up1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/up1.png"));
-            up2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/up2.png"));
-            down1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/down1.png"));
-            down2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/down2.png"));
-            left1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/left1.png"));
-            left2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/left2.png"));
-            right1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/right1.png"));
-            right2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/right2.png"));
+        up1 = setup("up1");
+        up2 = setup("up2");
+        down1 = setup("down1");
+        down2 = setup("down2");
+        left1 = setup("left1");
+        left2 = setup("left2");
+        right1 = setup("right1");
+        right2 = setup("right2");
+    }
 
+    public BufferedImage setup(String imageName){
+
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+
+        try{
+            image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/" + imageName + ".png"));
+            image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
         }catch(IOException e){
             e.printStackTrace();
         }
+        return image;
     }
 
     public void update() {
@@ -82,7 +91,7 @@ public class Player extends Entity{
             pickUpObject(objIndex);
 
             //IF COLLISION IS FALSE, PLAYER CAN MOVE
-            if (collisionOn == false){
+            if (!collisionOn){
                 switch(direction){
                     case "up":
                         WorldY -= speed;
@@ -115,35 +124,6 @@ public class Player extends Entity{
     public void pickUpObject(int i){
         if(i != 999){
 
-            String objectName = gp.obj[i].name;
-
-            switch(objectName) {
-                case "Basic Key":
-                    hasKey++;
-                    gp.obj[i] = null;
-                    gp.ui.showMessage("You got a key!");
-                    break;
-                case "Door":
-                    if(hasKey>0){
-                        gp.playSFX(2);
-                        gp.obj[i] = null;
-                        hasKey--;
-                        gp.ui.showMessage("You opened the door!");
-                    }else{
-                        gp.ui.showMessage("Silly you, you need a key to pass!");
-                    }
-                    break;
-                case "Test":
-                    gp.playSFX(1);
-                    speed = speed * 2;
-                    gp.obj[i] = null;
-                    break;
-                case "Basic Chest":
-                    gp.ui.gameFinished = true;
-                    gp.stopMusic();
-                    gp.playSFX(1);
-                    break;
-            }
         }
     }
 
@@ -185,6 +165,6 @@ public class Player extends Entity{
                 }
                 break;
         }
-        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, screenX, screenY, null);
     }
 }
