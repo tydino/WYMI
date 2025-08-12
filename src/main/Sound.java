@@ -14,8 +14,10 @@ public class Sound {
 
         soundURL[0] = getClass().getClassLoader().getResource("sound/overworld.wav");
         soundURL[1] = getClass().getClassLoader().getResource("sound/door_opening.wav");
-        soundURL[2] = getClass().getClassLoader().getResource("sound/hurt/fluffles_death.wav");
-        soundURL[3] = getClass().getClassLoader().getResource("sound/hurt/fluffles_hurt.wav");
+        soundURL[2] = getClass().getClassLoader().getResource("sound/fling_head.wav");
+        soundURL[3] = getClass().getClassLoader().getResource("sound/hurt/receive_damage.wav");
+        soundURL[4] = getClass().getClassLoader().getResource("sound/hurt/fluffles_death.wav");
+        soundURL[5] = getClass().getClassLoader().getResource("sound/hurt/fluffles_hurt.wav");
     }
 
     public void setFile(int i){

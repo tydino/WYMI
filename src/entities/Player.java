@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Player extends Entity{
 
@@ -225,6 +226,7 @@ public class Player extends Entity{
                 gp.keyH.enterPressed = false;
             }
             else{
+                gp.playSFX(2);
                 attacking = true;
             }
         }
@@ -235,6 +237,7 @@ public class Player extends Entity{
 
         if(i != -1){
             if(!invincible) {
+                gp.playSFX(3);
                 life -= 1;
                 invincible = true;
             }
@@ -247,13 +250,33 @@ public class Player extends Entity{
             if(!gp.monster[i].invincible){
 
                 gp.monster[i].life -=1;
+                gp.monster[i].damageReaction();
                 gp.monster[i].invincible = true;
 
+
                 if(gp.monster[i].life <= 0){
-                    gp.monster[i] = null;
+                    gp.playSFX(monsterSound(i, true));
+                    gp.monster[i].dying = true;
+                }else{
+                    gp.playSFX(monsterSound(i, false));
                 }
             }
         }
+    }
+
+    public int monsterSound(int index, boolean dead){
+        int monsterSound = -1;
+        Entity Monster = gp.monster[index];
+
+        if(Objects.equals(Monster.name, "Fluffle")){
+            if(!dead){
+                return 5;
+            }else{
+                return 4;
+            }
+        }
+
+        return monsterSound;
     }
 
     public void draw(Graphics2D g2){

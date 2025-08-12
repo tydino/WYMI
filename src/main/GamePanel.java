@@ -35,8 +35,8 @@ public class GamePanel extends JPanel implements Runnable{
     //SYSTEM
     public TileManager tileM = new TileManager(this);
     public KeyHandler  keyH = new KeyHandler(this);
-    Sound music = new Sound();
-    Sound sfx = new Sound();
+    public Sound music = new Sound();
+    public Sound sfx = new Sound();
     public CollisionCheck cChecker = new CollisionCheck(this);
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
@@ -120,7 +120,12 @@ public class GamePanel extends JPanel implements Runnable{
             }
             for(int i = 0; i< monster.length; i++){
                 if (monster[i] != null){
-                    monster[i].update();
+                    if(monster[i].alive && !monster[i].dying) {
+                        monster[i].update();
+                    }
+                    if(!monster[i].alive) {
+                        monster[i] = null;
+                    }
                 }
             }
         }

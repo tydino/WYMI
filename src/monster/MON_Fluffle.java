@@ -6,6 +6,7 @@ import main.GamePanel;
 import java.util.Random;
 
 public class MON_Fluffle extends Entity {
+
     public MON_Fluffle(GamePanel gp) {
         super(gp);
 
@@ -60,5 +61,11 @@ public class MON_Fluffle extends Entity {
 
             actionLockCount = 0;
         }
+    }
+
+    public void damageReaction(){
+
+        actionLockCount = 0;
+        direction = gp.player.direction;
     }
 }
