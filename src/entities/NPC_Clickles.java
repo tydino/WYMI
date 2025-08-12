@@ -26,14 +26,14 @@ public class NPC_Clickles extends Entity{
     }
 
     public void getImage(){
-        up1 = setup("npc", "clickles","up1");
-        up2 = setup("npc", "clickles","up2");
-        down1 = setup("npc", "clickles","down1");
-        down2 = setup("npc", "clickles","down2");
-        left1 = setup("npc", "clickles","left1");
-        left2 = setup("npc", "clickles","left2");
-        right1 = setup("npc", "clickles","right1");
-        right2 = setup("npc", "clickles","right2");
+        up1 = setup("npc", "clickles","up1", 1, 1);
+        up2 = setup("npc", "clickles","up2", 1, 1);
+        down1 = setup("npc", "clickles","down1", 1, 1);
+        down2 = setup("npc", "clickles","down2", 1, 1);
+        left1 = setup("npc", "clickles","left1", 1, 1);
+        left2 = setup("npc", "clickles","left2", 1, 1);
+        right1 = setup("npc", "clickles","right1", 1, 1);
+        right2 = setup("npc", "clickles","right2", 1, 1);
     }
 
     public void setDialogue(){

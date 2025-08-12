@@ -9,6 +9,6 @@ public class OBJ_BasicChest extends Entity {
         super(gp);
 
         name = "Basic Chest";
-        down1 = setup("objects", "basics", "basic_chest");
+        down1 = setup("objects", "basics", "basic_chest", 1, 1);
     }
 }

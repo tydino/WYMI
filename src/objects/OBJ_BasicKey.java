@@ -9,6 +9,6 @@ public class OBJ_BasicKey extends Entity {
         super(gp);
 
         name = "Basic Key";
-        down1 = setup("objects","basics","basic_key");
+        down1 = setup("objects","basics","basic_key", 1, 1);
     }
 }
