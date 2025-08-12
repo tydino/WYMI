@@ -8,11 +8,11 @@ import java.net.URL;
 public class Sound {
 
     Clip clip;
-    URL soundURL[] = new URL[30];
+    URL[] soundURL = new URL[30];
 
     public Sound(){
 
-        soundURL[0] = getClass().getClassLoader().getResource("sound/test_music.wav");
+        soundURL[0] = getClass().getClassLoader().getResource("sound/overworld.wav");
         soundURL[1] = getClass().getClassLoader().getResource("sound/test_sfx.wav");
         soundURL[2] = getClass().getClassLoader().getResource("sound/door_opening.wav");
     }

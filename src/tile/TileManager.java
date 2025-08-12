@@ -14,7 +14,7 @@ public class TileManager {
 
     GamePanel gp;
     public Tile[] tile;
-    public int mapTileNum[][];
+    public int[][] mapTileNum;
 
 
     public TileManager(GamePanel gp){
@@ -24,7 +24,7 @@ public class TileManager {
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
         getTileImage();
-        loadMap("maps/world01.txt");
+        loadMap("maps/map01.txt");
     }
 
     public void getTileImage() {
@@ -69,7 +69,7 @@ public class TileManager {
 
                 while(col < gp.maxWorldCol){
 
-                    String numbers[] = line.split(" ");
+                    String[] numbers = line.split(" ");
 
                     int num = Integer.parseInt(numbers[col]);
 

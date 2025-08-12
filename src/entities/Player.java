@@ -11,15 +11,15 @@ import java.io.IOException;
 
 public class Player extends Entity{
 
-    GamePanel gp;
     KeyHandler keyH;
 
     public final int screenX;
     public final int screenY;
 
     public Player(GamePanel gp, KeyHandler keyH){
-        
-        this.gp = gp;
+
+        super(gp);
+
         this.keyH = keyH;
 
         screenX = gp.screenWidth/2 - (gp.tileSize/2);
@@ -37,30 +37,31 @@ public class Player extends Entity{
         getPlayerImage();
     }
     public void setDefaultValues(){
-        WorldX=gp.tileSize * 23;
-        WorldY=gp.tileSize * 21;
-        speed=3;
+        WorldX=gp.tileSize * 33;
+        WorldY=gp.tileSize * 25;
+        speed=6;
         direction = "down";
     }
 
     public void getPlayerImage(){
-        up1 = setup("up1");
-        up2 = setup("up2");
-        down1 = setup("down1");
-        down2 = setup("down2");
-        left1 = setup("left1");
-        left2 = setup("left2");
-        right1 = setup("right1");
-        right2 = setup("right2");
+        up1 = setup("player","up1");
+        up2 = setup("player","up2");
+        down1 = setup("player","down1");
+        down2 = setup("player","down2");
+        left1 = setup("player","left1");
+        left2 = setup("player","left2");
+        right1 = setup("player","right1");
+        right2 = setup("player","right2");
     }
 
-    public BufferedImage setup(String imageName){
+    @Override
+    public BufferedImage setup(String imagePath, String imageName){
 
         UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;
 
         try{
-            image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/" + imageName + ".png"));
+            image = ImageIO.read(getClass().getClassLoader().getResourceAsStream( imagePath + "/" + imageName + ".png"));
             image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
         }catch(IOException e){
             e.printStackTrace();
@@ -89,6 +90,10 @@ public class Player extends Entity{
             //CHECKS OBJECT COLLISION
             int objIndex = gp.cChecker.checkObject(this, true);
             pickUpObject(objIndex);
+
+            //CHECK NPC COLLISION
+            int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
+            interactNPC(npcIndex);
 
             //IF COLLISION IS FALSE, PLAYER CAN MOVE
             if (!collisionOn){
@@ -122,8 +127,14 @@ public class Player extends Entity{
     }
 
     public void pickUpObject(int i){
-        if(i != 999){
+        if(i != -1){
 
+        }
+    }
+
+    public void interactNPC(int i){
+        if(i != -1){
+            System.out.println("hit npc");
         }
     }
 
