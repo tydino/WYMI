@@ -70,7 +70,7 @@ public class Player extends Entity{
     }
 
     public int getDefense(){
-        return defense = dexterity * currentAmulet.defense;
+        return defense = dexterity * currentAmulet.defenseValue;
     }
 
     public void getPlayerImage(){
@@ -255,7 +255,13 @@ public class Player extends Entity{
         if(i != -1){
             if(!invincible) {
                 gp.playSFX(3);
-                life -= 1;
+
+                int damage = gp.monster[i].attack - defense;
+                if (damage < 0) {
+                    damage = 0;
+                }
+
+                life -= damage;
                 invincible = true;
             }
         }
@@ -266,7 +272,12 @@ public class Player extends Entity{
 
             if(!gp.monster[i].invincible){
 
-                gp.monster[i].life -=1;
+                int damage = attack - gp.monster[i].defense;
+                if (damage < 0) {
+                    damage = 0;
+                }
+
+                gp.monster[i].life -= damage;
                 gp.monster[i].damageReaction();
                 gp.monster[i].invincible = true;
 
@@ -274,10 +285,31 @@ public class Player extends Entity{
                 if(gp.monster[i].life <= 0){
                     gp.playSFX(monsterSound(i, true));
                     gp.monster[i].dying = true;
+                    exp += gp.monster[i].exp;
+                    checkLevelUp();
                 }else{
                     gp.playSFX(monsterSound(i, false));
                 }
             }
+        }
+    }
+
+    public void checkLevelUp(){
+
+        if(exp >= nextLevelExp){
+
+            exp -= nextLevelExp;
+            level++;
+            nextLevelExp = nextLevelExp *2;
+            maxLife += 2;
+            strength++;
+            dexterity++;
+            attack = getAttack();
+            defense = getDefense();
+
+            gp.playSFX(6);
+            gp.gameState = gp.dialogueState;
+            gp.ui.currentDialogue = "You are now level " + level + "\n You feel a shift in your body \n and are now stronger!";
         }
     }
 

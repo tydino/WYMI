@@ -80,9 +80,10 @@ public class EventHandler {
         if(gp.keyH.enterPressed){
             gp.player.attackCanceled = true;
             gp.gameState = gameState;
-            gp.ui.currentDialogue = "You gain health.";
+            gp.ui.currentDialogue = "You gain health. \nAnd all creatures previously knocked out \nhave reawakened";
             gp.player.life = gp.player.maxLife;
             eventRect[col][row].eventDone = oneTime;
+            gp.aSetter.setMonster();
         }
     }
 

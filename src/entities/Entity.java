@@ -104,7 +104,13 @@ public class Entity {
         if(this.type ==2 && contactPlayer){
             if(!gp.player.invincible){
                 gp.playSFX(3);
-                gp.player.life -=1;
+
+                int damage = attack - gp.player.defense;
+                if (damage < 0) {
+                    damage = 0;
+                }
+
+                gp.player.life -= defense;
                 gp.player.invincible = true;
             }
         }

@@ -18,6 +18,7 @@ public class Sound {
         soundURL[3] = getClass().getClassLoader().getResource("sound/hurt/receive_damage.wav");
         soundURL[4] = getClass().getClassLoader().getResource("sound/hurt/fluffles_death.wav");
         soundURL[5] = getClass().getClassLoader().getResource("sound/hurt/fluffles_hurt.wav");
+        soundURL[6] = getClass().getClassLoader().getResource("sound/level_up.wav");
     }
 
     public void setFile(int i){

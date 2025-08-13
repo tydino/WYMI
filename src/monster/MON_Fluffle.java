@@ -15,6 +15,9 @@ public class MON_Fluffle extends Entity {
         speed = 3;
         maxLife = 2;
         life = maxLife;
+        attack = 2;
+        defense = 0;
+        exp = 1;
 
         solidArea.x = gp.scale*3;
         solidArea.y = gp.scale*10;
