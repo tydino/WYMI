@@ -3,6 +3,8 @@ package entities;
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
+import objects.OBJ_Amulet_Water;
+import objects.OBJ_Sword_grassBladed;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -16,6 +18,7 @@ public class Player extends Entity{
 
     public final int screenX;
     public final int screenY;
+    public boolean attackCanceled = false;
 
     public Player(GamePanel gp, KeyHandler keyH){
 
@@ -48,8 +51,26 @@ public class Player extends Entity{
         direction = "down";
 
         //PLAYER STATUS
+        level = 1;
         maxLife = 6;
         life = maxLife;
+        strength = 1;
+        dexterity = 1;
+        exp = 0;
+        nextLevelExp = 5;
+        coin = 0;
+        currentWeapon = new OBJ_Sword_grassBladed(gp);
+        currentAmulet = new OBJ_Amulet_Water(gp);
+        attack = getAttack();
+        defense = getDefense();
+    }
+
+    public int getAttack(){
+        return attack = strength * currentWeapon.attackValue;
+    }
+
+    public int getDefense(){
+        return defense = dexterity * currentAmulet.defense;
     }
 
     public void getPlayerImage(){
@@ -128,21 +149,20 @@ public class Player extends Entity{
             //IF COLLISION IS FALSE, PLAYER CAN MOVE
             if (!collisionOn && !keyH.enterPressed){
                 switch(direction){
-                    case "up":
-                        WorldY -= speed;
-                        break;
-                    case "down":
-                        WorldY += speed;
-                        break;
-                    case "left":
-                        WorldX -= speed;
-                        break;
-                    case "right":
-                        WorldX += speed;
-                        break;
+                    case "up": WorldY -= speed;break;
+                    case "down": WorldY += speed;break;
+                    case "left": WorldX -= speed;break;
+                    case "right": WorldX += speed;break;
                 }
             }
 
+            if(keyH.enterPressed && !attackCanceled){
+                gp.playSFX(2);
+                attacking = true;
+                spriteCounter = 0;
+            }
+
+            attackCanceled = false;
             gp.keyH.enterPressed = false;
 
             spriteCounter++;
@@ -221,13 +241,10 @@ public class Player extends Entity{
         if(gp.keyH.enterPressed){
 
             if(i != -1) {
+                attackCanceled = true;
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
                 gp.keyH.enterPressed = false;
-            }
-            else{
-                gp.playSFX(2);
-                attacking = true;
             }
         }
 

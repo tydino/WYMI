@@ -78,6 +78,7 @@ public class EventHandler {
     public void fullhealing(int col, int row, int gameState, boolean oneTime){
 
         if(gp.keyH.enterPressed){
+            gp.player.attackCanceled = true;
             gp.gameState = gameState;
             gp.ui.currentDialogue = "You gain health.";
             gp.player.life = gp.player.maxLife;

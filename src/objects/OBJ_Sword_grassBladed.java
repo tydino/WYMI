@@ -1,0 +1,14 @@
+package objects;
+
+import entities.Entity;
+import main.GamePanel;
+
+public class OBJ_Sword_grassBladed extends Entity {
+    public OBJ_Sword_grassBladed(GamePanel gp) {
+        super(gp);
+
+        name = "Grass Bladed Sword";
+        down1 = setup("objects", "swords", "grass_bladed_sword", 1, 1);
+        attackValue = 1;
+    }
+}
