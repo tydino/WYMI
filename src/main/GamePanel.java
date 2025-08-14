@@ -9,9 +9,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-//on part https://youtu.be/HL39xRzPpm4?list=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq
-
-
+//on part https://youtu.be/KHnMJvI20bU?list=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq
 
 public class GamePanel extends JPanel implements Runnable{
 

@@ -10,12 +10,12 @@ public class MON_Fluffle extends Entity {
     public MON_Fluffle(GamePanel gp) {
         super(gp);
 
-        type = 2;
+        type = type_monster;
         name = "Fluffle";
         speed = 3;
-        maxLife = 2;
+        maxLife = 10;
         life = maxLife;
-        attack = 2;
+        attack = 4;
         defense = 0;
         exp = 1;
 

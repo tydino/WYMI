@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Player extends Entity{
@@ -19,6 +20,8 @@ public class Player extends Entity{
     public final int screenX;
     public final int screenY;
     public boolean attackCanceled = false;
+    public ArrayList<Entity> inventory = new ArrayList<>();
+    public int inventorySize = 20;
 
     public Player(GamePanel gp, KeyHandler keyH){
 
@@ -37,12 +40,10 @@ public class Player extends Entity{
         solidArea.width = 7 * gp.scale;
         solidArea.height = 2 * gp.scale;
 
-        attackArea.width = 36;
-        attackArea.height = 36;
-
         setDefaultValues();
         getPlayerImage();
         getPlayerAttackImage();
+        setItems();
     }
     public void setDefaultValues(){
         WorldX=gp.tileSize * 33;
@@ -65,7 +66,14 @@ public class Player extends Entity{
         defense = getDefense();
     }
 
+    public void setItems(){
+
+        inventory.add(currentWeapon);
+        inventory.add(currentAmulet);
+    }
+
     public int getAttack(){
+        attackArea = currentWeapon.attackArea;
         return attack = strength * currentWeapon.attackValue;
     }
 
@@ -234,6 +242,21 @@ public class Player extends Entity{
     public void pickUpObject(int i){
         if(i != -1){
 
+            String text;
+
+            if(inventory.size() != inventorySize){
+
+                inventory.add(gp.obj[i]);
+                gp.playSFX(8);
+                text = "You Got a " + gp.obj[i].name + "!";
+            }
+            else{
+                text = "Sorry you cannot pick that up right now, \nyour inventory is full.";
+            }
+
+            gp.gameState = gp.dialogueState;
+            gp.ui.currentDialogue = text;
+            gp.obj[i] = null;
         }
     }
 
@@ -252,7 +275,7 @@ public class Player extends Entity{
 
     public void contactMonster(int i){
 
-        if(i != -1){
+        if(i != -1 && !gp.monster[i].invincible){
             if(!invincible) {
                 gp.playSFX(3);
 
@@ -310,6 +333,33 @@ public class Player extends Entity{
             gp.playSFX(6);
             gp.gameState = gp.dialogueState;
             gp.ui.currentDialogue = "You are now level " + level + "\n You feel a shift in your body \n and are now stronger!";
+        }
+    }
+
+    public void selectItem(){
+
+        int itemIndex = gp.ui.getItemIndexOnSlot();
+
+        if(itemIndex < inventory.size()){
+
+            Entity selectedItem = inventory.get(itemIndex);
+
+            if(selectedItem.type == type_sword || selectedItem.type == type_axe){
+                currentWeapon = selectedItem;
+                attack = getAttack();
+                gp.playSFX(9);
+            }
+            if(selectedItem.type == type_amulet){
+
+                currentAmulet = selectedItem;
+                defense = getDefense();
+                gp.playSFX(9);
+            }
+            if(selectedItem.type == type_consumable){
+
+                selectedItem.use(this);
+                inventory.remove(itemIndex);
+            }
         }
     }
 

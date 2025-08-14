@@ -2,7 +2,9 @@ package main;
 
 import entities.NPC_Clickles;
 import monster.MON_Fluffle;
+import objects.OBJ_BasicKey;
 import objects.OBJ_DoubleDoor;
+import objects.OBJ_NumNum_Vial;
 
 public class AssetSetter {
 
@@ -12,18 +14,30 @@ public class AssetSetter {
         this.gp = gp;
     }
 
-    public void setObject(){//in world map -1 from where the actual tile is in both x and y
+    public void setObject() {//in world map -1 from where the actual tile is in both x and y
 
-        gp.obj[0] = new OBJ_DoubleDoor(gp);
-        gp.obj[0].WorldX = gp.tileSize*18;
-        gp.obj[0].WorldY = gp.tileSize*18;
+        int i = 0;
+        gp.obj[i] = new OBJ_DoubleDoor(gp);
+        gp.obj[i].WorldX = gp.tileSize * 18;
+        gp.obj[i].WorldY = gp.tileSize * 18;
+        i++;
+        gp.obj[i] = new OBJ_BasicKey(gp, "Door Key");
+        gp.obj[i].WorldX = gp.tileSize * 18;
+        gp.obj[i].WorldY = gp.tileSize * 16;
+        i++;
+        gp.obj[i] = new OBJ_NumNum_Vial(gp, 4);
+        gp.obj[i].WorldX = gp.tileSize * 35;
+        gp.obj[i].WorldY = gp.tileSize * 17;
+        i++;
     }
 
     public void setNPC(){
 
-        gp.npc[0] = new NPC_Clickles(gp);
-        gp.npc[0].WorldX = gp.tileSize*16;
-        gp.npc[0].WorldY = gp.tileSize*10;
+        int i = 0;
+        gp.npc[i] = new NPC_Clickles(gp);
+        gp.npc[i].WorldX = gp.tileSize*16;
+        gp.npc[i].WorldY = gp.tileSize*10;
+        i++;
     }
 
     public void setMonster() {
