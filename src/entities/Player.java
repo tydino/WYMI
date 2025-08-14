@@ -4,6 +4,7 @@ import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
 import objects.OBJ_Amulet_Water;
+import objects.OBJ_Fireball;
 import objects.OBJ_Sword_grassBladed;
 
 import javax.imageio.ImageIO;
@@ -62,6 +63,7 @@ public class Player extends Entity{
         coin = 0;
         currentWeapon = new OBJ_Sword_grassBladed(gp);
         currentAmulet = new OBJ_Amulet_Water(gp);
+        projectile = new OBJ_Fireball(gp);
         attack = getAttack();
         defense = getDefense();
     }
@@ -184,6 +186,19 @@ public class Player extends Entity{
             }
         }
 
+        if(gp.keyH.shotKeyPressed && !projectile.alive && shotAvailableCount == 10){
+
+            //SET DEFAILT COORDINATES AND DIRECTIONS
+            projectile.set(WorldX, WorldY, direction, true, this);
+
+            //ADD IT TO THE LIST!
+            gp.projectileList.add(projectile);
+
+            shotAvailableCount = 0;
+
+            gp.playSFX(11);
+        }
+
         //This needs to be outside of key if statement
         if(invincible){
             invincibleCount++;
@@ -191,6 +206,10 @@ public class Player extends Entity{
                 invincible = false;
                 invincibleCount = 0;
             }
+        }
+
+        if(shotAvailableCount < 10){
+            shotAvailableCount++;
         }
 
     }
@@ -224,7 +243,7 @@ public class Player extends Entity{
             solidArea.height = attackArea.height;
             //checks monster collision
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-            damageMonster(monsterIndex);
+            damageMonster(monsterIndex, attack);
 
             //after checking reset everything
             WorldX = currentWorldX;
@@ -290,7 +309,7 @@ public class Player extends Entity{
         }
     }
 
-    public void damageMonster(int i){
+    public void damageMonster(int i, int attack){
         if(i != -1) {
 
             if(!gp.monster[i].invincible){

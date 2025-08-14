@@ -9,7 +9,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-//on part https://youtu.be/KHnMJvI20bU?list=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq
+//on part https://youtu.be/NN0iQZX_51M?list=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -46,6 +46,7 @@ public class GamePanel extends JPanel implements Runnable{
     public Entity[] obj = new Entity[20];//slots of objects that can be displayed at a time
     public Entity[] npc = new Entity[20];
     public Entity[] monster = new Entity[20];
+    public ArrayList<Entity> projectileList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
 
     //GAME STATE
@@ -127,6 +128,16 @@ public class GamePanel extends JPanel implements Runnable{
                     }
                 }
             }
+            for(int i = 0; i< projectileList.size(); i++){
+                if (projectileList.get(i) != null){
+                    if(projectileList.get(i).alive) {
+                        projectileList.get(i).update();
+                    }
+                    if(!projectileList.get(i).alive) {
+                        projectileList.remove(i);
+                    }
+                }
+            }
         }
         if(gameState == pauseState){
             //nothing for now
@@ -172,6 +183,11 @@ public class GamePanel extends JPanel implements Runnable{
             for(int i = 0; i< monster.length; i++){
                 if(monster[i] != null){
                     entityList.add(monster[i]);
+                }
+            }
+            for(int i = 0; i< projectileList.size(); i++){
+                if(projectileList.get(i) != null){
+                    entityList.add(projectileList.get(i));
                 }
             }
 

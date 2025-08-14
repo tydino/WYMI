@@ -1,0 +1,58 @@
+package entities;
+
+import main.GamePanel;
+
+public class Projectile extends Entity{
+
+    Entity user;
+
+    public Projectile(GamePanel gp){
+        super(gp);
+    }
+
+    public void set(int worldX, int worldY, String direction, boolean alive, Entity user){
+        this.WorldX = worldX;
+        this.WorldY = worldY;
+        this.direction = direction;
+        this.alive = alive;
+        this.user = user;
+        this.life = this.maxLife;
+    }
+    public void update() {
+
+        if(user == gp.player){
+            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+
+            if(monsterIndex != -1){
+                gp.player.damageMonster(monsterIndex, attack);
+                alive = false;
+            }
+        }
+        if(user != gp.player){
+
+        }
+
+        switch (direction){
+            case "up": WorldY -= speed; break;
+            case "down": WorldY += speed; break;
+            case "left": WorldX -= speed; break;
+            case "right": WorldX += speed; break;
+        }
+
+        life--;
+        if(life <= 0){
+            alive = false;
+        }
+
+        spriteCounter++;
+        if(spriteCounter > 10){
+            if(spriteNum == 1){
+                spriteNum = 2;
+            }
+            else if(spriteNum == 2){
+                spriteNum = 1;
+            }
+            spriteCounter = 0;
+        }
+    }
+}

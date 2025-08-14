@@ -37,6 +37,7 @@ public class Entity {
     public int spriteCounter =0;
     public int actionLockCount = 0;
     public int invincibleCount = 0;
+    public int shotAvailableCount = 0;
     int dyingCount = 0;
     int hpBarCount = 0;
 
@@ -45,6 +46,8 @@ public class Entity {
     public int speed;
     public int maxLife;
     public int life;
+    public int maxMana;
+    public int mana;
     public int level;
     public int strength;
     public int dexterity;
@@ -55,11 +58,13 @@ public class Entity {
     public int coin;
     public Entity currentWeapon;
     public Entity currentAmulet;
+    public Projectile projectile;
 
     //ITEM ATTRIBUTES
     public int attackValue;
     public int defenseValue;
     public String description = "";
+    public int useCost;
 
     //TYPE
     public int type;
@@ -115,7 +120,7 @@ public class Entity {
 
 
         if(this.type == type_monster && contactPlayer){
-            if(!gp.player.invincible && !invincible){
+            if(!gp.player.invincible){
                 gp.playSFX(3);
 
                 int damage = attack - gp.player.defense;
@@ -123,7 +128,7 @@ public class Entity {
                     damage = 0;
                 }
 
-                gp.player.life -= defense;
+                gp.player.life -= damage;
                 gp.player.invincible = true;
             }
         }
