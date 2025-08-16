@@ -1,6 +1,7 @@
 package main;
 
 import entities.Entity;
+import objects.ui.OBJ_Mana;
 import objects.ui.OBJ_heart;
 
 import java.awt.*;
@@ -11,7 +12,7 @@ public class UI {
     GamePanel gp;
     Graphics2D g2;
     Font arial_40, arial_80B;
-    BufferedImage heart_full, heart_half, heart_blank;
+    BufferedImage heart_full, heart_half, heart_blank, mana_full, mana_blank;
     public boolean messageOn = false;
     public String message = "";
     int messageCounter = 0;
@@ -32,6 +33,10 @@ public class UI {
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_blank = heart.image3;
+
+        Entity mana = new OBJ_Mana(gp);
+        mana_full = mana.image;
+        mana_blank = mana.image2;
     }
 
     public void showMessage(String text){
@@ -101,6 +106,26 @@ public class UI {
             }
             i++;
             x += gp.tileSize;
+        }
+
+        //DRAW MAX MANA
+        x = gp.tileSize/2-16;
+        y = (int) (gp.tileSize*1.5);
+        i = 0;
+        while(i<gp.player.maxMana){
+            g2.drawImage(mana_blank, x, y, null);
+            i++;
+            x += 36;
+        }
+
+        //DRAW MANA
+        x = gp.tileSize/2-16;
+        y = (int) (gp.tileSize*1.5);
+        i = 0;
+        while (i<gp.player.mana){
+            g2.drawImage(mana_full, x, y, null);
+            i++;
+            x+=36;
         }
 
     }
