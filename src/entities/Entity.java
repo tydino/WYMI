@@ -120,17 +120,7 @@ public class Entity {
 
 
         if(this.type == type_monster && contactPlayer){
-            if(!gp.player.invincible){
-                gp.playSFX(3);
-
-                int damage = attack - gp.player.defense;
-                if (damage < 0) {
-                    damage = 0;
-                }
-
-                gp.player.life -= damage;
-                gp.player.invincible = true;
-            }
+            damagePlayer(attack);
         }
 
         //IF COLLISION IS FALSE, PLAYER CAN MOVE
@@ -167,6 +157,24 @@ public class Entity {
                 invincible = false;
                 invincibleCount = 0;
             }
+        }
+
+        if(shotAvailableCount < 10){
+            shotAvailableCount++;
+        }
+    }
+
+    public void damagePlayer(int attack){
+        if(!gp.player.invincible){
+            gp.playSFX(3);
+
+            int damage = attack - gp.player.defense;
+            if (damage < 0) {
+                damage = 0;
+            }
+
+            gp.player.life -= damage;
+            gp.player.invincible = true;
         }
     }
 

@@ -2,6 +2,7 @@ package monster.corruption;
 
 import entities.Entity;
 import main.GamePanel;
+import objects.projectiles.OBJ_Corruption;
 
 import java.util.Random;
 
@@ -15,9 +16,10 @@ public class MON_CorruptAppleton extends Entity {
         speed = 3;
         maxLife = 20;
         life = maxLife;
-        attack = 6;
+        attack = 10;
         defense = 2;
         exp = 4;
+        projectile = new OBJ_Corruption(gp, attack, 1);
 
         solidArea.x = gp.scale*3;
         solidArea.y = gp.scale*10;
@@ -62,6 +64,14 @@ public class MON_CorruptAppleton extends Entity {
             }
 
             actionLockCount = 0;
+        }
+
+        int i = new Random().nextInt(100)+1;
+        if(i > 99 && !projectile.alive && shotAvailableCount == 10){
+            projectile.set(WorldX, WorldY, direction, true, this);
+            gp.projectileList.add(projectile);
+            shotAvailableCount = 0;
+            gp.playSFX(14);
         }
     }
 
