@@ -188,10 +188,13 @@ public class Player extends Entity{
             }
         }
 
-        if(gp.keyH.shotKeyPressed && !projectile.alive && shotAvailableCount == 10){
+        if(gp.keyH.shotKeyPressed && !projectile.alive && shotAvailableCount == 10 && projectile.haveResource(this)){
 
             //SET DEFAILT COORDINATES AND DIRECTIONS
             projectile.set(WorldX, WorldY, direction, true, this);
+
+            //SUBTRACT PROJECTILE COST
+            projectile.subtractResource(this);
 
             //ADD IT TO THE LIST!
             gp.projectileList.add(projectile);

@@ -19,7 +19,7 @@ public class MON_CorruptAppleton extends Entity {
         attack = 10;
         defense = 2;
         exp = 4;
-        projectile = new OBJ_Corruption(gp, attack, 1);
+        projectile = new OBJ_Corruption(gp, attack, 0);
 
         solidArea.x = gp.scale*3;
         solidArea.y = gp.scale*10;
