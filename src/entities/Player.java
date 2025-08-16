@@ -393,6 +393,13 @@ public class Player extends Entity{
                 return 4;
             }
         }
+        if(Objects.equals(Monster.name, "Corrupt Appleton")){
+            if(!dead){
+                return 13;
+            }else{
+                return 12;
+            }
+        }
 
         return monsterSound;
     }
