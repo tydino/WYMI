@@ -1,4 +1,4 @@
-package objects;
+package objects.amulets;
 
 import entities.Entity;
 import main.GamePanel;

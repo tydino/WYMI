@@ -26,6 +26,7 @@ public class Sound {
         soundURL[11] = getClass().getClassLoader().getResource("sound/burning.wav");
         soundURL[12] = getClass().getClassLoader().getResource("sound/hurt/appleton_death.wav");
         soundURL[13] = getClass().getClassLoader().getResource("sound/hurt/appleton_hurt.wav");
+        soundURL[13] = getClass().getClassLoader().getResource("sound/corruption_spit.wav");
     }
 
     public void setFile(int i){

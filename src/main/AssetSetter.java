@@ -1,12 +1,12 @@
 package main;
 
-import entities.NPC_Clickles;
-import monster.MON_CorruptAppleton;
+import entities.npc.NPC_Clickles;
 import monster.MON_Fluffle;
-import objects.OBJ_Axe_grassBladed;
-import objects.OBJ_BasicKey;
-import objects.OBJ_DoubleDoor;
-import objects.OBJ_NumNum_Vial;
+import monster.corruption.MON_CorruptAppleton;
+import objects.axes.OBJ_Axe_grassBladed;
+import objects.basics.OBJ_BasicKey;
+import objects.basics.OBJ_DoubleDoor;
+import objects.vials.OBJ_NumNum_Vial;
 
 public class AssetSetter {
 

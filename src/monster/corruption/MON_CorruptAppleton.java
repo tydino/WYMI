@@ -1,4 +1,4 @@
-package monster;
+package monster.corruption;
 
 import entities.Entity;
 import main.GamePanel;

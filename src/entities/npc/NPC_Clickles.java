@@ -1,11 +1,12 @@
-package entities;
+package entities.npc;
 
+import entities.Entity;
 import main.GamePanel;
 
 import java.awt.*;
 import java.util.Random;
 
-public class NPC_Clickles extends Entity{
+public class NPC_Clickles extends Entity {
 
     public NPC_Clickles(GamePanel gp){
         super(gp);

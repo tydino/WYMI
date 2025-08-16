@@ -19,7 +19,7 @@ public class Entity {
     public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collision = false;
-    String[] dialogues = new String[50];
+    public String[] dialogues = new String[50];
 
     // STATE
     public int WorldX, WorldY;

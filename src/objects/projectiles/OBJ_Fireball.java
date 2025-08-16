@@ -1,4 +1,4 @@
-package objects;
+package objects.projectiles;
 
 import entities.Projectile;
 import main.GamePanel;

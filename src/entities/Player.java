@@ -3,9 +3,9 @@ package entities;
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
-import objects.OBJ_Amulet_Water;
-import objects.OBJ_Fireball;
-import objects.OBJ_Sword_grassBladed;
+import objects.amulets.OBJ_Amulet_Water;
+import objects.projectiles.OBJ_Fireball;
+import objects.swords.OBJ_Sword_grassBladed;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

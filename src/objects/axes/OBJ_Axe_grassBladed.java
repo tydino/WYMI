@@ -1,4 +1,4 @@
-package objects;
+package objects.axes;
 
 import entities.Entity;
 import main.GamePanel;
