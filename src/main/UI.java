@@ -246,7 +246,7 @@ public class UI {
         textY+=lineHeight;
         g2.drawString("Next Level", textX, textY);
         textY+=lineHeight;
-        g2.drawString("Coin", textX, textY);
+        g2.drawString("Gears", textX, textY);
         textY+=gp.tileSize;
         g2.drawString("Weapon", textX, textY);
         textY+= (int) (gp.tileSize * 1.25);

@@ -27,7 +27,7 @@ public class AssetSetter {
         gp.obj[i].WorldX = gp.tileSize * 18;
         gp.obj[i].WorldY = gp.tileSize * 16;
         i++;
-        gp.obj[i] = new OBJ_NumNum_Vial(gp, 4);
+        gp.obj[i] = new OBJ_NumNum_Vial(gp, 2);
         gp.obj[i].WorldX = gp.tileSize * 35;
         gp.obj[i].WorldY = gp.tileSize * 17;
         i++;

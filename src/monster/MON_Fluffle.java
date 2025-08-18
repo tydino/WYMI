@@ -2,6 +2,9 @@ package monster;
 
 import entities.Entity;
 import main.GamePanel;
+import objects.gears.OBJ_BronzeGear;
+import objects.ui.OBJ_Mana;
+import objects.ui.OBJ_heart;
 
 import java.util.Random;
 
@@ -70,5 +73,20 @@ public class MON_Fluffle extends Entity {
 
         actionLockCount = 0;
         direction = gp.player.direction;
+    }
+
+    public void checkDrop(){
+
+        //CAST A DICE
+        int i = new Random().nextInt(4)+1;
+
+        //SET THE DROP
+        if(i == 1){
+            dropItem(new OBJ_heart(gp, 2));
+        }else if(i == 2){
+            dropItem(new OBJ_Mana(gp, 1));
+        }else if(i == 3){
+            dropItem(new OBJ_BronzeGear(gp));
+        }
     }
 }

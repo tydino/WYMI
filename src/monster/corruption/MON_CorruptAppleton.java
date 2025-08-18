@@ -2,7 +2,10 @@ package monster.corruption;
 
 import entities.Entity;
 import main.GamePanel;
+import objects.gears.OBJ_BronzeGear;
 import objects.projectiles.OBJ_Corruption;
+import objects.ui.OBJ_Mana;
+import objects.ui.OBJ_heart;
 
 import java.util.Random;
 
@@ -84,6 +87,21 @@ public class MON_CorruptAppleton extends Entity {
             case "left": direction = "right"; break;
             case "right": direction = "left"; break;
 
+        }
+    }
+
+    public void checkDrop(){
+
+        //CAST A DICE
+        int i = new Random().nextInt(4)+1;
+
+        //SET THE DROP
+        if(i == 1){
+            dropItem(new OBJ_heart(gp, 4));
+        }else if(i == 2){
+            dropItem(new OBJ_Mana(gp, 3));
+        }else if(i == 3){
+            dropItem(new OBJ_BronzeGear(gp));
         }
     }
 }

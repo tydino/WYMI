@@ -24,9 +24,6 @@ public class OBJ_NumNum_Vial extends Entity {
         gp.gameState = gp.dialogueState;
         gp.ui.currentDialogue = "You drink the " + name + "\n your life has been recovered by " + value + ".";
         entity.life += value;
-        if(gp.player.life > gp.player.maxLife){
-            gp.player.life = gp.player.maxLife;
-        }
         gp.playSFX(10);
     }
 }

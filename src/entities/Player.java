@@ -217,6 +217,14 @@ public class Player extends Entity{
             shotAvailableCount++;
         }
 
+        if(life > maxLife){
+            life = maxLife;
+        }
+
+        if(mana > maxMana){
+            mana = maxMana;
+        }
+
     }
 
     public void attacking(){
@@ -266,21 +274,31 @@ public class Player extends Entity{
     public void pickUpObject(int i){
         if(i != -1){
 
-            String text;
+            //PICKUP ONLY ITEMS
+            if(gp.obj[i].type == type_pickupOnly){
 
-            if(inventory.size() != inventorySize){
-
-                inventory.add(gp.obj[i]);
-                gp.playSFX(8);
-                text = "You Got a " + gp.obj[i].name + "!";
-            }
-            else{
-                text = "Sorry you cannot pick that up right now, \nyour inventory is full.";
+                gp.obj[i].use(this);
+                gp.obj[i] = null;
             }
 
-            gp.gameState = gp.dialogueState;
-            gp.ui.currentDialogue = text;
-            gp.obj[i] = null;
+            //INVENTORY ITEMS
+
+            else {
+                String text;
+
+                if (inventory.size() != inventorySize) {
+
+                    inventory.add(gp.obj[i]);
+                    gp.playSFX(8);
+                    text = "You Got a " + gp.obj[i].name + "!";
+                } else {
+                    text = "Sorry you cannot pick that up right now, \nyour inventory is full.";
+                }
+
+                gp.gameState = gp.dialogueState;
+                gp.ui.currentDialogue = text;
+                gp.obj[i] = null;
+            }
         }
     }
 
