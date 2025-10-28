@@ -7,6 +7,7 @@ import objects.axes.OBJ_Axe_grassBladed;
 import objects.basics.OBJ_BasicKey;
 import objects.basics.OBJ_DoubleDoor;
 import objects.vials.OBJ_NumNum_Vial;
+import tile_interactive.IT_DryTree;
 
 public class AssetSetter {
 
@@ -85,5 +86,12 @@ public class AssetSetter {
         gp.monster[i].WorldX = gp.tileSize * 22;
         gp.monster[i].WorldY = gp.tileSize * 21;
         i++;
+    }
+
+    public void setInteractiveTile() {
+
+        int i = 0;
+        gp.iTile[i] = new IT_DryTree(gp, 43, 14);i++;
+        gp.iTile[i] = new IT_DryTree(gp, 43, 15);i++;
     }
 }

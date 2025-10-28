@@ -3,13 +3,13 @@ package main;
 import entities.Entity;
 import entities.Player;
 import tile.TileManager;
+import tile_interactive.InteractiveTile;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
-//on part https://youtu.be/RoNr6opGjWc?list=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq
+//on part https://youtu.be/H23OmhqLo3E?list=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq&t=55
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -46,6 +46,7 @@ public class GamePanel extends JPanel implements Runnable{
     public Entity[] obj = new Entity[50];//slots of objects that can be displayed at a time
     public Entity[] npc = new Entity[50];
     public Entity[] monster = new Entity[50];
+    public InteractiveTile[] iTile = new InteractiveTile[50];
     public ArrayList<Entity> projectileList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
 
@@ -71,6 +72,7 @@ public class GamePanel extends JPanel implements Runnable{
         aSetter.setObject();
         aSetter.setNPC();
         aSetter.setMonster();
+        aSetter.setInteractiveTile();
 
         gameState = titleState;
     }
@@ -84,7 +86,7 @@ public class GamePanel extends JPanel implements Runnable{
     @Override
     public void run() {
 
-        double drawInterval = 1000000000/FPS;
+        double drawInterval = (double) 1000000000 /FPS;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
@@ -113,9 +115,9 @@ public class GamePanel extends JPanel implements Runnable{
             //PLAYER
             player.update();
             //NPC
-            for(int i = 0; i< npc.length; i++){
-                if (npc[i] != null){
-                    npc[i].update();
+            for (Entity entity : npc) {
+                if (entity != null) {
+                    entity.update();
                 }
             }
             for(int i = 0; i< monster.length; i++){
@@ -137,6 +139,11 @@ public class GamePanel extends JPanel implements Runnable{
                     if(!projectileList.get(i).alive) {
                         projectileList.remove(i);
                     }
+                }
+            }
+            for (InteractiveTile interactiveTile : iTile) {
+                if (interactiveTile != null) {
+                    interactiveTile.update();
                 }
             }
         }
@@ -166,44 +173,50 @@ public class GamePanel extends JPanel implements Runnable{
             //TILE
             tileM.draw(g2);
 
+            //INTERACTIVE TILE
+            for (InteractiveTile interactiveTile : iTile) {
+                if (interactiveTile != null) {
+                    interactiveTile.draw(g2);
+                }
+            }
+
             //ADDS ENTITIES TO LIST
             entityList.add(player);
 
-            for(int i = 0; i< npc.length; i++){
-                if(npc[i] != null){
-                    entityList.add(npc[i]);
+            for (Entity entity : npc) {
+                if (entity != null) {
+                    entityList.add(entity);
                 }
             }
 
-            for(int i = 0; i< obj.length; i++){
-                if(obj[i] != null){
-                    entityList.add(obj[i]);
+            for (Entity entity : obj) {
+                if (entity != null) {
+                    entityList.add(entity);
                 }
             }
 
-            for(int i = 0; i< monster.length; i++){
-                if(monster[i] != null){
-                    entityList.add(monster[i]);
+            for (Entity entity : monster) {
+                if (entity != null) {
+                    entityList.add(entity);
                 }
             }
-            for(int i = 0; i< projectileList.size(); i++){
-                if(projectileList.get(i) != null){
-                    entityList.add(projectileList.get(i));
+            for (Entity entity : projectileList) {
+                if (entity != null) {
+                    entityList.add(entity);
                 }
             }
 
             //SORT
-            Collections.sort(entityList, new Comparator<Entity>() {
+            entityList.sort(new Comparator<Entity>() {
                 @Override
                 public int compare(Entity e1, Entity e2) {
-                    int result = Integer.compare(e1.WorldY, e2.WorldY);
-                    return result;
+                    return Integer.compare(e1.WorldY, e2.WorldY);
                 }
             });
 
             //DRAW ENTITIES
-            for(int i = 0; i< entityList.size(); i++){
-                entityList.get(i).draw(g2);
+            for (Entity entity : entityList) {
+                entity.draw(g2);
             }
 
             entityList.clear();
