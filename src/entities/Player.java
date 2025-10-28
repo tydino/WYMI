@@ -155,6 +155,9 @@ public class Player extends Entity{
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
             contactMonster(monsterIndex);
 
+            //CHECK INTERACTIVE TILE COLLISION
+            gp.cChecker.checkEntity(this, gp.iTile);
+
             //CHECK EVENT
             gp.eHandler.checkEvent();
 
@@ -258,6 +261,9 @@ public class Player extends Entity{
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
             damageMonster(monsterIndex, attack);
 
+            int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
+            damageInteractiveTile(iTileIndex);
+
             //after checking reset everything
             WorldX = currentWorldX;
             WorldY = currentWorldY;
@@ -356,6 +362,15 @@ public class Player extends Entity{
                     gp.playSFX(monsterSound(i, false));
                 }
             }
+        }
+    }
+
+    public void damageInteractiveTile(int i) {
+
+        if(i != -1 && gp.iTile[i].destrucatable && gp.iTile[i].isCorrectItem(this)){
+
+            gp.iTile[i].playSE();
+            gp.iTile[i] = gp.iTile[i].getDestroyedForm();
         }
     }
 

@@ -17,6 +17,17 @@ public class InteractiveTile extends Entity {
         this.WorldY = gp.tileSize * row;
     }
 
+    public boolean isCorrectItem(Entity entity) {
+        boolean isCorrectItem = false;
+        return isCorrectItem;
+    }
+
+    public void playSE(){}
+    public InteractiveTile getDestroyedForm() {
+        InteractiveTile tile = null;
+        return tile;
+    }
+
     @Override
     public void update() {
 
