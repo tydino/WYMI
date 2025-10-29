@@ -64,6 +64,7 @@ public class Player extends Entity{
         nextLevelExp = 5;
         coin = 0;
         currentWeapon = new OBJ_Sword_grassBladed(gp);
+        //currentWeapon = new OBJ_Axe_grassBladed(gp);
         currentAmulet = new OBJ_Amulet_Water(gp);
         projectile = new OBJ_Fireball(gp);
         attack = getAttack();
@@ -367,10 +368,14 @@ public class Player extends Entity{
 
     public void damageInteractiveTile(int i) {
 
-        if(i != -1 && gp.iTile[i].destrucatable && gp.iTile[i].isCorrectItem(this)){
-
-            gp.iTile[i].playSE();
-            gp.iTile[i] = gp.iTile[i].getDestroyedForm();
+        if(i != -1 && gp.iTile[i].destrucatable && gp.iTile[i].isCorrectItem(this) && !gp.iTile[i].invincible){
+            gp.iTile[i].invincible = true;
+            if(gp.iTile[i].life < 1) {
+                gp.iTile[i].playSE();
+                gp.iTile[i] = gp.iTile[i].getDestroyedForm();
+            }else{
+                gp.iTile[i].life--;
+            }
         }
     }
 

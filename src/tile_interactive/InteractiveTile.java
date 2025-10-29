@@ -30,6 +30,12 @@ public class InteractiveTile extends Entity {
 
     @Override
     public void update() {
-
+        if(invincible){
+            invincibleCount++;
+            if(invincibleCount > 10){
+                invincible = false;
+                invincibleCount = 0;
+            }
+        }
     }
 }

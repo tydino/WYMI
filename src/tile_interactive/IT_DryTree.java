@@ -13,6 +13,7 @@ public class IT_DryTree extends InteractiveTile{
 
         down1 = setup("tiles", "interactable", "smalltree_dry", 1, 1);
         destrucatable = true;
+        life = 2;
     }
 
     @Override
