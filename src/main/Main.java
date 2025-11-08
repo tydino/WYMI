@@ -2,6 +2,9 @@ package main;
 
 import javax.swing.*;
 
+//todo
+//make sure that all animation frames play as frames get added to entities.
+
 //use https://www.piskelapp.com/p/create/sprite for animated sprites
 public class Main {
 
